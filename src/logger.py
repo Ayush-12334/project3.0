@@ -22,4 +22,4 @@ logging.basicConfig(
 # Entry point
 if __name__ == "__main__":
     logging.info("Logging is started")
-    print("Check logs folder — logging is working ✅")
+    print("Check logs folder — logging is working ")

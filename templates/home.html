@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Segmentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Customer Value Prediction</h1>
+
+    <form action="/prediction" method="POST">
+
+        <div class="form-group">
+            <label>Year of Birth</label>
+            <input type="number" name="year_birth" required>
+        </div>
+
+        <div class="form-group">
+            <label>Education</label>
+            <select name="education" required>
+                <option value="">Select</option>
+                <option value="Graduation">Graduation</option>
+                <option value="PhD">PhD</option>
+                <option value="Master">Master</option>
+                <option value="Basic">Basic</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Marital Status</label>
+            <select name="marital_status" required>
+                <option value="">Select</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Together">Together</option>
+                <option value="Divorced">Divorced</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Income</label>
+            <input type="number" name="income" required>
+        </div>
+
+        <div class="grid">
+            <input type="number" name="kidhome" placeholder="Kids at Home" required>
+            <input type="number" name="teenhome" placeholder="Teens at Home" required>
+            <input type="number" name="recency" placeholder="Recency" required>
+            <input type="date" name="Dt_Customer" placeholder="Date Joined">
+        </div>
+
+        <h3>Spending Amount</h3>
+        <div class="grid">
+            <input type="number" name="mnt_wines" placeholder="Wines" required>
+            <input type="number" name="mnt_fruits" placeholder="Fruits" required>
+            <input type="number" name="mnt_meat" placeholder="Meat" required>
+            <input type="number" name="mnt_fish" placeholder="Fish" required>
+            <input type="number" name="mnt_sweet" placeholder="Sweet" required>
+            <input type="number" name="mnt_gold" placeholder="Gold" required>
+        </div>
+
+        <h3>Purchases</h3>
+        <div class="grid">
+            <input type="number" name="num_deals" placeholder="Deals" required>
+            <input type="number" name="num_web" placeholder="Web" required>
+            <input type="number" name="num_catalog" placeholder="Catalog" required>
+            <input type="number" name="num_store" placeholder="Store" required>
+            <input type="number" name="num_web_visits" placeholder="Web Visits" required>
+        </div>
+
+        <h3>Campaign Response</h3>
+        <div class="grid">
+            <select name="accepted_cmp1"><option value="0">No</option><option value="1">Yes</option></select>
+            <select name="accepted_cmp2"><option value="0">No</option><option value="1">Yes</option></select>
+            <select name="accepted_cmp3"><option value="0">No</option><option value="1">Yes</option></select>
+            <select name="accepted_cmp4"><option value="0">No</option><option value="1">Yes</option></select>
+            <select name="accepted_cmp5"><option value="0">No</option><option value="1">Yes</option></select>
+        </div>
+
+        <div class="form-group">
+            <label>Complaint</label>
+            <select name="complain">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <!-- Hidden field for Response to avoid missing column -->
+        <input type="hidden" name="Response" value="0">
+
+        <button type="submit">Predict Customer Value</button>
+    </form>
+
+    {% if results %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p>{{ results }}</p>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

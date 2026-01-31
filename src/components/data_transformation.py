@@ -20,6 +20,10 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DatatranformationConfig()
 
+
+
+
+
     def feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
         logging.info("Started feature engineering")
         try:
@@ -28,6 +32,7 @@ class DataTransformation:
 
             # ---- Age ----
             if 'Year_Birth' in df.columns:
+                df['Year_Birth'] = pd.to_numeric(df['Year_Birth'], errors="coerce")
                 df['Age'] = today.year - df['Year_Birth']
 
             # ---- Education (Safe mapping) ----
@@ -38,35 +43,53 @@ class DataTransformation:
             # ---- Marital Status (Safe mapping) ----
             if 'Marital_Status' in df.columns:
                 mar_map = {"Married": 1, "Together": 1, "Absurd": 0, "Widow": 0,
-                           "YOLO": 0, "Divorced": 0, "Single": 0, "Alone": 0}
+                        "YOLO": 0, "Divorced": 0, "Single": 0, "Alone": 0}
                 df['Marital_Status'] = df['Marital_Status'].map(mar_map).fillna(0).astype(int)
 
             # ---- Children & Parental Status ----
             if {'Kidhome', 'Teenhome'}.issubset(df.columns):
+                df['Kidhome'] = pd.to_numeric(df['Kidhome'], errors='coerce')
+                df['Teenhome'] = pd.to_numeric(df['Teenhome'], errors='coerce')
+
                 df['Children'] = df['Kidhome'] + df['Teenhome']
                 df['Parental Status'] = np.where(df['Children'] > 0, 1, 0)
 
             # ---- Total Spending ----
             spending_cols = ['MntWines', 'MntFruits', 'MntMeatProducts',
-                             'MntFishProducts', 'MntSweetProducts', 'MntGoldProds']
+                            'MntFishProducts', 'MntSweetProducts', 'MntGoldProds']
             available_spend = [c for c in spending_cols if c in df.columns]
             if available_spend:
                 df['Total_Spending'] = df[available_spend].sum(axis=1)
 
             # ---- Days as Customer ----
             if 'Dt_Customer' in df.columns:
-                df['Dt_Customer'] = pd.to_datetime(df['Dt_Customer'], errors='coerce',format='%d-%m-%Y')
-                # Fill NaT with a default date before calculating days
+                df['Dt_Customer'] = pd.to_datetime(df['Dt_Customer'], errors='coerce')
                 df['Dt_Customer'] = df['Dt_Customer'].fillna(df['Dt_Customer'].mode()[0])
                 df['Days_as_Customer'] = (today - df['Dt_Customer']).dt.days
 
-            # Drop non-numeric/original columns
+            # ---- MISSING FEATURES FROM NOTEBOOK ----
+            # Total Promo
+            promo_cols = ['AcceptedCmp1','AcceptedCmp2','AcceptedCmp3','AcceptedCmp4','AcceptedCmp5']
+            available_promo = [c for c in promo_cols if c in df.columns]
+            if available_promo:
+                for col in available_promo:
+                    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+                df['Total Promo'] = df[available_promo].sum(axis=1)
+
+            # Offers Responded To / Response
+            if 'Response' not in df.columns:
+                df['Response'] = 0  # default 0; you can use np.where(df['Total Promo']>0,1,0) if needed
+            df['Offers_Responded_To'] = df[available_promo].sum(axis=1) + df['Response']
+
+            # Drop original columns
             drop_cols = ['Year_Birth', 'Kidhome', 'Teenhome', 'Dt_Customer', 'ID', 'Z_CostContact', 'Z_Revenue']
             df.drop(columns=[c for c in drop_cols if c in df.columns], inplace=True)
 
             return df
+
         except Exception as e:
-            raise CustomException(e, sys)
+             raise CustomException(e, sys)
+
 
     def get_transformer_object(self, train_set: pd.DataFrame, test_set: pd.DataFrame):
         try:
