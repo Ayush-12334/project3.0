@@ -2,36 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Segmentation</title>
+    <title>Customer Value Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <div class="container">
     <h1>Customer Value Prediction</h1>
+    <p class="subtitle">Enter customer details to predict customer value</p>
 
     <form action="/prediction" method="POST">
 
+        <!-- Basic Information -->
+        <h3>Basic Information</h3>
+
         <div class="form-group">
-            <label>Year of Birth</label>
-            <input type="number" name="year_birth" required>
+            <label for="year_birth">Year of Birth</label>
+            <input type="number" id="year_birth" name="year_birth" required>
         </div>
 
         <div class="form-group">
-            <label>Education</label>
-            <select name="education" required>
-                <option value="">Select</option>
-                <option value="Graduation">Graduation</option>
-                <option value="PhD">PhD</option>
-                <option value="Master">Master</option>
+            <label for="education">Education</label>
+            <select id="education" name="education" required>
+                <option value="">Select Education</option>
                 <option value="Basic">Basic</option>
+                <option value="Graduation">Graduation</option>
+                <option value="Master">Master</option>
+                <option value="PhD">PhD</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Marital Status</label>
-            <select name="marital_status" required>
-                <option value="">Select</option>
+            <label for="marital_status">Marital Status</label>
+            <select id="marital_status" name="marital_status" required>
+                <option value="">Select Status</option>
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>
                 <option value="Together">Together</option>
@@ -40,57 +45,83 @@
         </div>
 
         <div class="form-group">
-            <label>Income</label>
-            <input type="number" name="income" required>
+            <label for="income">Annual Income</label>
+            <input type="number" id="income" name="income" required>
         </div>
+
+        <!-- Household & Engagement -->
+        <h3>Household & Engagement</h3>
 
         <div class="grid">
             <input type="number" name="kidhome" placeholder="Kids at Home" required>
             <input type="number" name="teenhome" placeholder="Teens at Home" required>
-            <input type="number" name="recency" placeholder="Recency" required>
-            <input type="date" name="Dt_Customer" placeholder="Date Joined">
+            <input type="number" name="recency" placeholder="Days Since Last Purchase" required>
+            <input type="date" name="Dt_Customer" placeholder="Customer Since">
         </div>
 
-        <h3>Spending Amount</h3>
+        <!-- Spending -->
+        <h3>Spending Amount (Last 2 Years)</h3>
+
         <div class="grid">
-            <input type="number" name="mnt_wines" placeholder="Wines" required>
-            <input type="number" name="mnt_fruits" placeholder="Fruits" required>
-            <input type="number" name="mnt_meat" placeholder="Meat" required>
-            <input type="number" name="mnt_fish" placeholder="Fish" required>
-            <input type="number" name="mnt_sweet" placeholder="Sweet" required>
-            <input type="number" name="mnt_gold" placeholder="Gold" required>
+            <input type="number" name="mnt_wines" placeholder="Wine Products" required>
+            <input type="number" name="mnt_fruits" placeholder="Fruit Products" required>
+            <input type="number" name="mnt_meat" placeholder="Meat Products" required>
+            <input type="number" name="mnt_fish" placeholder="Fish Products" required>
+            <input type="number" name="mnt_sweet" placeholder="Sweet Products" required>
+            <input type="number" name="mnt_gold" placeholder="Gold Products" required>
         </div>
 
-        <h3>Purchases</h3>
+        <!-- Purchases -->
+        <h3>Purchase Behavior</h3>
+
         <div class="grid">
-            <input type="number" name="num_deals" placeholder="Deals" required>
-            <input type="number" name="num_web" placeholder="Web" required>
-            <input type="number" name="num_catalog" placeholder="Catalog" required>
-            <input type="number" name="num_store" placeholder="Store" required>
-            <input type="number" name="num_web_visits" placeholder="Web Visits" required>
+            <input type="number" name="num_deals" placeholder="Deals Purchases" required>
+            <input type="number" name="num_web" placeholder="Web Purchases" required>
+            <input type="number" name="num_catalog" placeholder="Catalog Purchases" required>
+            <input type="number" name="num_store" placeholder="Store Purchases" required>
+            <input type="number" name="num_web_visits" placeholder="Web Visits / Month" required>
         </div>
 
-        <h3>Campaign Response</h3>
+        <!-- Campaign Response -->
+        <h3>Marketing Campaign Response</h3>
+
         <div class="grid">
-            <select name="accepted_cmp1"><option value="0">No</option><option value="1">Yes</option></select>
-            <select name="accepted_cmp2"><option value="0">No</option><option value="1">Yes</option></select>
-            <select name="accepted_cmp3"><option value="0">No</option><option value="1">Yes</option></select>
-            <select name="accepted_cmp4"><option value="0">No</option><option value="1">Yes</option></select>
-            <select name="accepted_cmp5"><option value="0">No</option><option value="1">Yes</option></select>
+            <select name="accepted_cmp1">
+                <option value="0">Campaign 1 – No</option>
+                <option value="1">Campaign 1 – Yes</option>
+            </select>
+            <select name="accepted_cmp2">
+                <option value="0">Campaign 2 – No</option>
+                <option value="1">Campaign 2 – Yes</option>
+            </select>
+            <select name="accepted_cmp3">
+                <option value="0">Campaign 3 – No</option>
+                <option value="1">Campaign 3 – Yes</option>
+            </select>
+            <select name="accepted_cmp4">
+                <option value="0">Campaign 4 – No</option>
+                <option value="1">Campaign 4 – Yes</option>
+            </select>
+            <select name="accepted_cmp5">
+                <option value="0">Campaign 5 – No</option>
+                <option value="1">Campaign 5 – Yes</option>
+            </select>
         </div>
 
+        <!-- Complaint -->
         <div class="form-group">
-            <label>Complaint</label>
-            <select name="complain">
+            <label for="complain">Customer Complaint</label>
+            <select id="complain" name="complain">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
         </div>
 
-        <!-- Hidden field for Response to avoid missing column -->
+        <!-- Hidden field -->
         <input type="hidden" name="Response" value="0">
 
         <button type="submit">Predict Customer Value</button>
+
     </form>
 
     {% if results %}
