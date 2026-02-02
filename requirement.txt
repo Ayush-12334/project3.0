@@ -1,8 +1,0 @@
-numpy
-pandas
-scikit-learn
-seaborn
-dill
-xgboost
-flask
--e .
