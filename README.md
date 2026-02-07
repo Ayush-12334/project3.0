@@ -29,6 +29,11 @@ This enables:
 * Improved business decision-making
 
 ---
+## screenshot
+
+
+
+
 
 ## 💡 Proposed Solution
 
@@ -156,8 +161,9 @@ The application is deployed using Render:
 ### Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd project_name
+git clone https://github.com/Ayush-12334/Customer-Categorization.git
+cd Customer-Categorization
+
 ```
 
 ### Create Virtual Environment
