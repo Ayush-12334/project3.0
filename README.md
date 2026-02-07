@@ -1,48 +1,82 @@
 # 🚀 End-to-End Machine Learning Project — Customer Personality Segmentation
 
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Machine Learning](https://img.shields.io/badge/ML-ScikitLearn-orange)
+![Flask](https://img.shields.io/badge/Framework-Flask-black)
+![Deployment](https://img.shields.io/badge/Deploy-Render-green)
+
 ---
 
 ## 📌 Project Overview
 
-Customer Personality Segmentation is an end-to-end Machine Learning project designed to analyze customer data and predict customer personality segments using ML algorithms.
+Customer Personality Segmentation is an end-to-end Machine Learning project designed to analyze customer data and predict customer personality segments using machine learning algorithms.
 
-The system helps malls, retail stores, and product-based companies understand customer behavior by grouping customers into clusters based on personal details and purchasing history.
+The system helps malls, retail stores, and product-based companies understand customer behavior by grouping customers into meaningful clusters based on personal details and purchasing history.
 
-This project implements a complete production-level ML pipeline including data ingestion, validation, transformation, clustering, model training, and deployment using Flask and Render.
+This project demonstrates a complete production-level ML pipeline including:
+
+* Data ingestion
+* Data transformation
+* Customer clustering
+* Model training
+* Prediction pipeline
+* Flask web application
+* Deployment using Render
+
+---
+
+## 🌐 Live Demo
+
+You can access the deployed application here:
+
+👉 [https://customer-categorization-94gw.onrender.com/prediction](https://customer-categorization-94gw.onrender.com/prediction)
+
+Enter customer details and get real-time personality cluster prediction.
 
 ---
 
 ## 🎯 Problem Statement
 
-Businesses collect large amounts of customer data, but extracting actionable insights from it can be difficult.
+Businesses collect large amounts of customer data, but extracting actionable insights from it can be challenging.
 
-The goal of this project is to:
+The objectives of this project are:
 
 * Cluster customers based on behavioral and demographic data.
 * Identify customer personality segments.
-* Predict the cluster number of new customers dynamically using machine learning classification techniques.
+* Predict cluster numbers dynamically for new customers using classification techniques.
 
 This enables:
 
 * Targeted marketing strategies
-* Personalized recommendations
+* Personalized product recommendations
 * Improved business decision-making
 
 ---
-## screenshot
 
+## 🖼️ Application Screenshots
 
+(Add your screenshots inside a folder named `screenshots`)
 
+### 🏠 Customer Input Form
 
+![Customer Form](screenshots/form.png)
+
+---
+
+### 🎯 Prediction Result Page
+
+![Prediction Result](screenshots/result.png)
+
+---
 
 ## 💡 Proposed Solution
 
-The solution uses a Machine Learning approach where:
+The solution follows a machine learning pipeline:
 
-1. Historical customer data is processed and validated.
-2. Customers are grouped into clusters using unsupervised learning.
-3. A classification model learns from clustered data.
-4. The system predicts the cluster type for new customers based on input features.
+1. Historical customer data is ingested and validated.
+2. Customers are grouped using clustering algorithms.
+3. Cluster labels are used to train a classification model.
+4. New customer inputs are processed through the prediction pipeline to determine cluster type.
 
 ---
 
@@ -58,7 +92,7 @@ The solution uses a Machine Learning approach where:
 * Pandas
 * NumPy
 
-### Backend
+### Backend Framework
 
 * Flask
 
@@ -80,22 +114,19 @@ project_root/
 ├── app.py                       # Flask application
 │
 ├── src/
-│   │
-│   ├── data_ingestion.py        # Load and ingest raw data
+│   ├── data_ingestion.py        # Data loading
 │   ├── data_transformation.py   # Feature engineering & preprocessing
 │   ├── data_clustering.py       # Customer clustering logic
-│   ├── model_trainer.py         # Model training and evaluation
-│   │
+│   ├── model_trainer.py         # Model training
 │   ├── exception.py             # Custom exception handling
-│   ├── logger.py                # Logging system
+│   ├── logger.py                # Logging configuration
 │
 ├── pipelines/
 │   ├── model_prediction.py      # Prediction pipeline
 │
-├── artifacts/                   # Saved models and preprocessing files
-│
-├── templates/                   # HTML templates
-├── static/                      # CSS / static files
+├── artifacts/                   # Saved models and preprocessors
+├── templates/                   # HTML files
+├── static/                      # CSS and static assets
 │
 ├── requirements.txt
 ├── README.md
@@ -107,52 +138,31 @@ project_root/
 
 ### 1️⃣ Data Ingestion
 
-* Reads raw customer dataset
+* Reads raw dataset
 * Loads data into pipeline
 
 ### 2️⃣ Data Transformation
 
 * Feature engineering
-* Data preprocessing
-* Scaling and encoding
+* Encoding and scaling
+* Data preprocessing pipeline
 
 ### 3️⃣ Data Clustering
 
-* Uses clustering algorithms to group customers
+* Groups customers into clusters
 * Generates cluster labels
 
 ### 4️⃣ Model Training
 
-* Trains classification model using cluster labels
+* Trains classification model
 * Evaluates performance
 * Saves trained model
 
 ### 5️⃣ Prediction Pipeline
 
-* Accepts new customer data
+* Accepts new input data
 * Applies preprocessing
-* Predicts customer cluster dynamically
-
----
-
-## 🌐 Web Application
-
-A Flask-based web interface allows users to:
-
-* Enter customer details
-* Submit purchase information
-* Predict customer personality segment instantly
-
----
-
-## 🚀 Deployment
-
-The application is deployed using Render:
-
-1. Push project to GitHub
-2. Connect repository with Render
-3. Configure build and start commands
-4. Deploy Flask application
+* Predicts customer personality cluster
 
 ---
 
@@ -163,7 +173,6 @@ The application is deployed using Render:
 ```bash
 git clone https://github.com/Ayush-12334/Customer-Categorization.git
 cd Customer-Categorization
-
 ```
 
 ### Create Virtual Environment
@@ -214,7 +223,7 @@ python app.py
 * Real-time predictions
 * Dashboard visualization
 * Advanced clustering techniques
-* Model monitoring
+* Model monitoring and tracking
 
 ---
 
@@ -226,4 +235,4 @@ Machine Learning & Backend Development Enthusiast
 
 ---
 
-⭐ If you found this project useful, give it a star on GitHub!
+⭐ If you found this project useful, consider giving it a star on GitHub!
